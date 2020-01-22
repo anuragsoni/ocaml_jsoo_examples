@@ -1,5 +1,5 @@
-(executable
- (name main)
+(executables
+ (names hello_world)
  (modes js)
  (promote (until-clean))
  (libraries brr note))

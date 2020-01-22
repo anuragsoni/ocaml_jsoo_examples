@@ -1,4 +1,4 @@
-PHONY: deps format
+PHONY: deps format build
 
 deps:
 	opam pin add -n note.dev git+https://github.com/dbuenzli/note.git
@@ -7,3 +7,6 @@ deps:
 
 format:
 	dune build @fmt --auto-promote
+
+build:
+	dune build --profile=release
