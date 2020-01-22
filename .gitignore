@@ -2,3 +2,5 @@ _build
 *.merlin
 _opam
 _esy
+*.bc
+*.bc.js

@@ -1,0 +1,5 @@
+(executable
+ (name main)
+ (modes js)
+ (promote (until-clean))
+ (libraries brr note))
