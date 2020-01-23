@@ -1,0 +1,5 @@
+(executables
+ (names counter)
+ (modes js)
+ (promote (until-clean))
+ (libraries ocaml-vdom js_of_ocaml))
