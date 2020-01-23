@@ -1,0 +1,5 @@
+(executables
+ (names counter)
+ (modes js)
+ (promote (until-clean))
+ (libraries js_of_ocaml js_of_ocaml-tyxml))
