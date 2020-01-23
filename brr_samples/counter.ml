@@ -5,22 +5,31 @@ type model = int
 
 let initial_model = 0
 
-let apply_action = function
-  | `Increment -> fun x -> x + 1
-  | `Decrement -> fun x -> x - 1
+type action = Increment | Decrement
 
-let create_button action label =
+let apply_action = function
+  | Increment -> fun x -> x + 1
+  | Decrement -> fun x -> x - 1
+
+let create_button : action -> string -> El.child * action Note.event =
+ fun action label ->
   let btn = El.button [ `Txt (Jstr.v label) ] in
-  let e = Ev.for_el btn Ev.click (fun _ -> apply_action action) in
+  let e = Ev.for_el btn Ev.click (fun _ -> action) in
   (btn, e)
 
-let main () =
-  let add, add_ev = create_button `Increment "+" in
-  let dec, dec_ev = create_button `Decrement "-" in
-  let events = E.select [ add_ev; dec_ev ] in
-  let counter_s = S.accum 0 events in
-  S.map
-    (fun model -> [ dec; `Txt (Jstr.v (string_of_int model)); add ])
-    counter_s
+let count : model Note.signal -> El.child list Note.signal =
+ fun m -> S.map (fun c -> [ `Txt (Jstr.v (string_of_int c)) ]) m
 
-let () = App.run (fun () -> El.def_children (El.document_body ()) (main ()))
+let main : unit -> El.child list =
+ fun () ->
+  let sub, sub_e = create_button Decrement "-" in
+  let add, add_e = create_button Increment "+" in
+  let events = E.select [ sub_e; add_e ] in
+  let do_action = E.map apply_action events in
+  let counts = S.accum initial_model do_action in
+  let count = count counts in
+  let p = El.span [] in
+  El.def_children p count;
+  [ sub; p; add ]
+
+let () = App.run (fun () -> El.set_children (El.document_body ()) (main ()))
