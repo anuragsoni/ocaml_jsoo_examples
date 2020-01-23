@@ -2,4 +2,4 @@
  (names counter)
  (modes js)
  (promote (until-clean))
- (libraries js_of_ocaml js_of_ocaml-tyxml))
+ (libraries js_of_ocaml js_of_ocaml-tyxml js_of_ocaml-lwt))
