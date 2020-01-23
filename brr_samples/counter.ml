@@ -17,6 +17,7 @@ let create_button : action -> string -> El.child * action Note.event =
   let e = Ev.for_el btn Ev.click (fun _ -> action) in
   (btn, e)
 
+(** We need to re-create the elements that are affected by the model change *)
 let count : model Note.signal -> El.child list Note.signal =
  fun m -> S.map (fun c -> [ `Txt (Jstr.v (string_of_int c)) ]) m
 
@@ -24,8 +25,10 @@ let main : unit -> El.child list =
  fun () ->
   let sub, sub_e = create_button Decrement "-" in
   let add, add_e = create_button Increment "+" in
+  (* [events] will track the occurrence of every Increment/Decrement event  *)
   let events = E.select [ sub_e; add_e ] in
   let do_action = E.map apply_action events in
+  (* We will start accumulating the counter value, starting with our initial_model state *)
   let counts = S.accum initial_model do_action in
   let count = count counts in
   let p = El.span [] in
