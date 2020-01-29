@@ -1,4 +1,4 @@
-PHONY: deps format build
+PHONY: deps format build clean
 
 deps:
 	opam pin add -n note.dev git+https://github.com/dbuenzli/note.git
@@ -12,3 +12,6 @@ format:
 
 build:
 	dune build --profile=release
+
+clean:
+	dune clean

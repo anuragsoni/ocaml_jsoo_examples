@@ -1,5 +1,7 @@
 (executables
- (names counter)
+ (names counter keyboard)
  (modes js)
  (promote (until-clean))
+ (preprocess
+  (pps js_of_ocaml-ppx))
  (libraries js_of_ocaml js_of_ocaml-tyxml js_of_ocaml-lwt))
