@@ -47,11 +47,11 @@ module Router = struct
   let router =
     one_of
       [
-        (None, bear () @--> Action.Bears);
-        (None, cats () @--> fun n -> Action.Cats n);
-        (None, dog () @--> fun name -> Action.Dog name);
-        (None, fish () @--> Action.Fish);
-        (None, elephants () @--> Action.Elephants);
+        bear () @--> Action.Bears;
+        (cats () @--> fun n -> Action.Cats n);
+        (dog () @--> fun name -> Action.Dog name);
+        fish () @--> Action.Fish;
+        elephants () @--> Action.Elephants;
       ]
 
   let setup_router () =
