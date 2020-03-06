@@ -1,0 +1,7 @@
+(executables
+ (names hello counter)
+ (modes js)
+ (preprocess
+  (pps ppx_jane ppx_pattern_bind js_of_ocaml-ppx))
+ (promote (until-clean))
+ (libraries bonsai.web))
