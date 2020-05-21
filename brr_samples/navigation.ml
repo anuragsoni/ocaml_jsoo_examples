@@ -85,7 +85,7 @@ let main () =
     List.map
       (fun m ->
         let url = Jstr.v ("http://localhost:8000/#/" ^ m) in
-        El.li [ El.a ~atts:[ Att.href url ] [ `Txt (Jstr.v m) ] ])
+        El.li [ El.a ~at:[ At.href url ] [ `Txt (Jstr.v m) ] ])
       [ "bears"; "fish"; "elephants"; "cats/12"; "dog/tupper" ]
   in
   let d = El.div [] in
